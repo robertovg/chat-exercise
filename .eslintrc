@@ -20,7 +20,7 @@
     "no-unused-vars": [
       1,
       {
-        "argsIgnorePattern": "context|args|props|res|next|^err"
+        "argsIgnorePattern": "obj|context|args|props|res|next|^err"
       }
     ],
     "arrow-body-style": [2, "as-needed"],
