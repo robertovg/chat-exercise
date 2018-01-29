@@ -50,7 +50,7 @@ And you should have the application up and running in localhost:3000.
   * [x] **meteor dependencies**: apollo accounts-password
   * [x] **subscriptions**: subscriptions-transport-ws apollo-link-ws
   * [x] **utilities && cosmetics**: font-awesome lodash
-* [ ] Create the needed structure recommended by [Meteor](https://guide.meteor.com/#example-app) and generating backbone of the application.
+* [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.
 * [ ] Generate `graphql` api definition (User, ChatRoom, Message).
 * [ ] Decide which style approach to using (BEM).
 * [ ] Create Login component and basic Auth Components: Register & Login / Application & Logout.
