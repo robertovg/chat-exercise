@@ -28,7 +28,6 @@ export default class LoggedApp extends Component {
     });
   }
 
-
   handleChange(event) {
     this.setState({ talkingWith: event.target.value });
     // Fire talkingWith
