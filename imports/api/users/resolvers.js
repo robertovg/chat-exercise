@@ -1,10 +1,8 @@
 // eslint-disable-next-line
 import { Meteor } from 'meteor/meteor';
-import { PubSub } from 'graphql-subscriptions';
-
-export const pubsub = new PubSub();
-
-const SOMETHING_CHANGED_TOPIC = 'something_changed';
+// eslint-disable-next-line
+import { Accounts } from 'meteor/accounts-base';
+import { pubsub, NEW_USER_EVENT } from '../pubsub';
 
 export default {
   Query: {
@@ -14,12 +12,8 @@ export default {
   },
 
   Subscription: {
-    newUser: {
-      subscribe: () => {
-        // TODO change to real new user
-        console.log('inside somethingChanged');
-        return pubsub.asyncIterator(SOMETHING_CHANGED_TOPIC);
-      },
+    justCreatedUser: {
+      subscribe: () => pubsub.asyncIterator(NEW_USER_EVENT),
     },
   },
 };

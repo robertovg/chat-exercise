@@ -18,4 +18,4 @@ const schema = makeExecutableSchema({
 // Now login, links and ws are managed by swydo:ddp-apollo
 createApolloServer({ schema });
 
-// 1
+// 3s

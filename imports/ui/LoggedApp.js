@@ -9,21 +9,24 @@ export default class LoggedApp extends Component {
   state = { talkingWith: '' };
 
   componentWillMount() {
-    this.props.data.subscribeToMore({
-      document: gql`
-        subscription newUser {
-          user {
-            _id
-            alias
-          }
+    const SUBSCRIBE_USER_RANDOM_CHANGES = gql`
+      subscription justCreatedUser {
+        justCreatedUser {
+          _id
+          alias
         }
-      `,
-      // variables: {
-      //   channelId: this.props.match.params.channelId,
-      // },
+      }
+    `;
+
+    this.props.data.subscribeToMore({
+      document: SUBSCRIBE_USER_RANDOM_CHANGES,
       updateQuery: (prev, { subscriptionData }) => {
-        console.log('updateQuery');
-        return prev;
+        console.log('updateQuery', prev, subscriptionData);
+        // We need to return the same shape of data to show the new users
+        return {
+          ...prev,
+          users: [...prev.users, subscriptionData.data.justCreatedUser],
+        };
       },
     });
   }
@@ -39,6 +42,7 @@ export default class LoggedApp extends Component {
   };
 
   render() {
+    console.log('reloading');
     const { user, users = [] } = this.props.data;
 
     return (

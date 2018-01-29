@@ -3,5 +3,5 @@ extend type Query {
 }
 
 type Subscription {
-  newUser: String
+  justCreatedUser: User
 }
