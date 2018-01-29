@@ -57,7 +57,7 @@ And you should have the application up and running in localhost:3000.
 * [ ] Decide which style approach to using (BEM).
 * [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
 * [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
-* [ ] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1)
+* [ ] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1) -> No working because of some [issues](https://github.com/apollographql/meteor-integration/issues/109). Moving to ddp-apollo to connect with apollo-client v2.
 * [ ] Instead of "mocking importing" global variables from Meteor (WebApp, Meteor, Accounts), I'll add rule to have globally available.
 * [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
 * [ ] Create one ChatForm component (only show if a chat has been selected, to create the messages).
