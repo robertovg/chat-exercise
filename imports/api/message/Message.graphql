@@ -9,3 +9,7 @@ type Message {
 type Mutation {
   createMessage(from: String!, chatRoomId: String!, content: String!): Message
 }
+
+extend type Subscription {
+  justCreatedMessage: Message
+}

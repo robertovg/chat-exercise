@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 // eslint-disable-next-line
 import { Accounts } from 'meteor/accounts-base';
-import { pubsub, NEW_USER_EVENT } from '../pubsub';
+import { pubsub, newUserEvent } from '../pubsub';
 
 export default {
   User: {
@@ -23,7 +23,7 @@ export default {
 
   Subscription: {
     justCreatedUser: {
-      subscribe: () => pubsub.asyncIterator(NEW_USER_EVENT),
+      subscribe: () => pubsub.asyncIterator(newUserEvent),
     },
   },
 };

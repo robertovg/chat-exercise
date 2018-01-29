@@ -5,6 +5,18 @@ import { graphql, compose } from 'react-apollo';
 
 import ChatRoomMessages from './ChatRoomMessages';
 
+const subscribeMessageChanges = gql`
+  subscription justCreatedMessage {
+    justCreatedMessage {
+      _id
+      createdAt
+      from
+      chatRoomId
+      content
+    }
+  }
+`;
+
 const chatRoomQuery = gql`
   query chatRoom($chatRoomId: String!) {
     chatRoom(chatRoomId: $chatRoomId) {
@@ -41,6 +53,24 @@ class ChatRoom extends Component {
     userInput: '',
     disabled: false,
   };
+
+  componentWillMount() {
+    this.props.chatRoomData.subscribeToMore({
+      document: subscribeMessageChanges,
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log('updateQuery', prev, subscriptionData);
+        // We need to return the same shape of data with the new message
+        return {
+          ...prev,
+          chatRoom: {
+            ...prev.chatRoom,
+            messages: [...prev.chatRoom.messages, subscriptionData.data.justCreatedMessage],
+          },
+        };
+      },
+    });
+  }
+
   handleMessageSubmission(event) {
     event.preventDefault();
     // To avoid double submission
@@ -62,6 +92,8 @@ class ChatRoom extends Component {
       })
       .then(e => {
         console.log(e);
+        // I don't do anything with the new message because I want to subscribe
+        // any new message instead.
         this.setState({
           userInput: '',
           disabled: false,
@@ -103,13 +135,11 @@ class ChatRoom extends Component {
 export default compose(
   graphql(chatRoomQuery, {
     name: 'chatRoomData',
-    options: ownProps => {
-      return {
-        variables: {
-          chatRoomId: ownProps.chatRoomParam._id,
-        },
-      };
-    },
+    options: ownProps => ({
+      variables: {
+        chatRoomId: ownProps.chatRoomParam._id,
+      },
+    }),
   }),
   graphql(createMessageMutation, { name: 'createMessage' })
 )(ChatRoom);

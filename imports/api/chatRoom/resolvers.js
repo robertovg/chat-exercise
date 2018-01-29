@@ -8,23 +8,19 @@ import Message from '../message/message';
 export default {
   ChatRoom: {
     otherUser: (chatRoomOwn, context) => {
-      console.log('inside otherUser', chatRoomOwn, context);
       const loggedUserId = Accounts.userId();
       const otherUserId = chatRoomOwn.member1 === loggedUserId ? chatRoomOwn.member2 : loggedUserId;
-
-      console.log(otherUserId);
-      return Meteor.users.findOne(otherUserId);
+      const result = Meteor.users.findOne(otherUserId);
+      return result;
     },
     messages: chatRoom => {
-      console.log('inside message');
-      return Message.find({ from: chatRoom.member1 }).fetch();
+      const result = Message.find({ chatRoomId: chatRoom._id }).fetch();
+      return result;
     },
   },
   Query: {
     chatRoom(obj, { chatRoomId }) {
-      console.log(`inside message ${chatRoomId}`);
       const result = ChatRoom.findOne({ _id: chatRoomId });
-      console.log(result);
       return result || {};
     },
   },
