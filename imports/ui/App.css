@@ -4,6 +4,7 @@
  */
 :root {
   --black: rgba(0, 0, 0, 0.6);
+  --white: #fff;
   --borders-color: #ccc;
   --whity-background: #ecf0f1;
   --other: #d3d3d3;
@@ -122,18 +123,51 @@ button[disabled] {
   display: grid;
   align-content: center;
   font-weight: bold;
-  color: var(--whity-background);
+  color: var(--white);
   background-color: var(--pending);
 }
 .loggedBody--messages {
   display: grid;
+  /* not really working as expected with grid */
   overflow-x: auto;
+  padding: 0 2rem;
+  grid-row-gap: 2px;
+  align-content: baseline;
 }
+
+.loggedBody--messages .message {
+  color: var(--black);
+  min-height: 1rem;
+  max-height: 2.5rem;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.loggedBody--messages .message.message--oops {
+  color: var(--borders-color);
+}
+.loggedBody--messages .isMine {
+  justify-self: end;
+  background-color: var(--mine);
+}
+
+.loggedBody--messages .isOther {
+  justify-self: start;
+  background-color: var(--other);
+}
+
+/*  I wish I have more time but no...
+
+.loggedBody--userInput {
+  position: fixed;
+  bottom:  0;
+  width: 100%;
+} */
 .loggedBody--userInput input {
   width: 100%;
   height: 100%;
   font-size: 3rem;
-  color: var(--black);
+  color: var(--pending);
   vertical-align: middle;
 }
 

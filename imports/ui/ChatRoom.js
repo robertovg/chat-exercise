@@ -70,6 +70,28 @@ class ChatRoom extends Component {
       },
     });
   }
+  /**
+   * Moving the logic of Message creation to a diferent function
+   */
+  createTheMessage(from, chatRoomId, content, oops = false) {
+    return new Promise((resolve, reject) => {
+      // call the mutation
+      this.props
+        .createMessage({
+          variables: {
+            from,
+            chatRoomId,
+            content,
+          },
+        })
+        .then(e => {
+          resolve(e);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 
   handleMessageSubmission(event) {
     event.preventDefault();
@@ -81,15 +103,9 @@ class ChatRoom extends Component {
       disabled: true,
     });
     const { loggedUser, chatRoomData } = this.props;
-    // call the mutation
-    this.props
-      .createMessage({
-        variables: {
-          from: loggedUser._id,
-          chatRoomId: chatRoomData.chatRoom._id,
-          content: this.state.userInput,
-        },
-      })
+    // Put here a function to deal with special commands
+    const messageContent = this.state.userInput;
+    this.createTheMessage(loggedUser._id, chatRoomData.chatRoom._id, messageContent)
       .then(e => {
         console.log(e);
         // I don't do anything with the new message because I want to subscribe
@@ -119,12 +135,13 @@ class ChatRoom extends Component {
         <section className="loggedBody--chatTitle">
           Chat between {loggedUser.alias} && {chatRoomData.chatRoom.otherUser.alias}
         </section>
-        <ChatRoomMessages messages={chatRoomData.chatRoom.messages} />
+        <ChatRoomMessages messages={chatRoomData.chatRoom.messages} loggedUser={loggedUser} />
         <form className="loggedBody--userInput" onSubmit={e => this.handleMessageSubmission(e)}>
           <input
             value={this.state.userInput}
             onChange={e => this.handleUserInputChange(e)}
             disabled={this.state.disabled}
+            placeholder="write something"
           />
         </form>
       </div>

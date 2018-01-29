@@ -62,8 +62,8 @@ And you should have the application up and running in localhost:3000.
 * [x] Create one ChatForm component (only show if a chat has been selected, to create the messages).
 * [ ] Send newMessageEvent only to the proper chatRoom members using kind of .
 * [ ] Be able to update show if the other user is writing.
-* [ ] Work on the styles for mobile first only design. Just a simple grid with 3 sections (header, main, footer)
-* [ ] Place your own messages are on the right hand side in a green bubble and the other persons messages are on the left hand side in a grey bubble.
+* [x] Work on the styles for mobile first only design. Just a simple grid with 3 sections (header, main, footer)
+* [x] Place your own messages are on the right hand side in a green bubble and the other persons messages are on the left hand side in a grey bubble.
 * [ ] Implement commands in chatForm messages:
   * [ ] /nick <name> - sets your name for the chat
   * [ ] /think <message> - makes the text appear in dark grey, instead of black
