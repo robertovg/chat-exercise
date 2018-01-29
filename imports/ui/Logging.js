@@ -35,15 +35,17 @@ export default class Logging extends Component {
 
   render() {
     return (
-      <form onSubmit={this.login}>
-        <p>Welcome to Chat Exercise: </p>
-        <input
-          type="text"
-          placeholder="Enter your chat name"
-          ref={input => {
-            this.username = input;
-          }}
-        />
+      <form className="logging" onSubmit={this.login}>
+        <div className="logging--welcomebox">
+          <p>Welcome to Chat Exercise:</p>
+          <input
+            type="text"
+            placeholder="Enter your chat name"
+            ref={input => {
+              this.username = input;
+            }}
+          />
+        </div>
         <button type="submit">Enter</button>
       </form>
     );

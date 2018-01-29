@@ -115,12 +115,12 @@ class ChatRoom extends Component {
     const { chatRoomData, loggedUser } = this.props;
     if (chatRoomData.loading) return null;
     return (
-      <div>
-        <section>
+      <div className="loggedBody">
+        <section className="loggedBody--chatTitle">
           Chat between {loggedUser.alias} && {chatRoomData.chatRoom.otherUser.alias}
         </section>
         <ChatRoomMessages messages={chatRoomData.chatRoom.messages} />
-        <form onSubmit={e => this.handleMessageSubmission(e)}>
+        <form className="loggedBody--userInput" onSubmit={e => this.handleMessageSubmission(e)}>
           <input
             value={this.state.userInput}
             onChange={e => this.handleUserInputChange(e)}

@@ -8,12 +8,14 @@ import { graphql, withApollo } from 'react-apollo';
 import LoggedApp from './LoggedApp';
 import Logging from './Logging';
 
+import './App.css';
+
 const App = props => {
   const { data, client } = props;
   // Skipping the execution if data is not loaded
   if (data.loading) return null;
   // We show the LoggedApp  or Logging one depending if the user is logged
-  return <div>{data.user._id ? <LoggedApp {...props} /> : <Logging client={client} />}</div>;
+  return data.user._id ? <LoggedApp {...props} /> : <Logging client={client} />;
 };
 
 const userQuery = gql`

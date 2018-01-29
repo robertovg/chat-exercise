@@ -72,8 +72,8 @@ class LoggedApp extends Component {
     const { user, users = [] } = this.props.data;
 
     return (
-      <div>
-        <header>
+      <div className="logged">
+        <header className="logged--header">
           <p>Hi {user.alias}</p>
           <label>
             <select value={this.state.talkingWith} onChange={e => this.handleChange(e)}>
@@ -94,13 +94,11 @@ class LoggedApp extends Component {
             Logout
           </button>
         </header>
-        <main>
-          {this.state.chatRoom._id ? (
-            <ChatRoom chatRoomParam={this.state.chatRoom} loggedUser={user} />
-          ) : (
-            <h1>Select one person to talk with</h1>
-          )}
-        </main>
+        {this.state.chatRoom._id ? (
+          <ChatRoom chatRoomParam={this.state.chatRoom} loggedUser={user} />
+        ) : (
+          <p>Select one person to talk with</p>
+        )}
       </div>
     );
   }

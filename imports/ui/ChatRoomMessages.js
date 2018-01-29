@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ChatRoomMessages = ({ messages }) => (
-  <section>
+  <section className="loggedBody--messages">
     {messages.length ? (
       messages.map(e => <div key={e._id}>{e.content}</div>)
     ) : (

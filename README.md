@@ -53,13 +53,14 @@ And you should have the application up and running in localhost:3000.
   * [x] **subscriptions**: subscriptions-transport-ws v0.5.4 apollo-link-ws graphql-subscriptions v0.3.1
   * [x] **utilities && cosmetics**: font-awesome lodash
 * [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.
-* [ ] Generate `graphql` api definition (User, ChatRoom, Message).
+* [x] Generate `graphql` api definition (User, ChatRoom, Message).
 * [ ] Decide which style approach to using (BEM).
 * [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
 * [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [x] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1) -> No working because of some [issues](https://github.com/apollographql/meteor-integration/issues/109). Moving to ddp-apollo to connect with apollo-client v2.
-* [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
+* [x] Create one ChatRoomMessages component (only show if a chat has been selected).
 * [x] Create one ChatForm component (only show if a chat has been selected, to create the messages).
+* [ ] Send newMessageEvent only to the proper chatRoom members using kind of .
 * [ ] Be able to update show if the other user is writing.
 * [ ] Work on the styles for mobile first only design. Just a simple grid with 3 sections (header, main, footer)
 * [ ] Place your own messages are on the right hand side in a green bubble and the other persons messages are on the left hand side in a grey bubble.

@@ -1,0 +1,157 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+/**
+ * Some css variables
+ */
+:root {
+  --black: rgba(0, 0, 0, 0.6);
+  --borders-color: #ccc;
+  --whity-background: #ecf0f1;
+  --other: #d3d3d3;
+  --mine: #2ecc71;
+  --pending: #03a9f4;
+  --shadow--1: rgba(0, 0, 0, 0.12);
+  --shadow--2: rgba(0, 0, 0, 0.24);
+  --shadow--3: rgba(0, 0, 0, 0.25);
+  --shadow--4: rgba(0, 0, 0, 0.22);
+}
+/**
+ * Start General
+ */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  color: var(--black);
+}
+a,
+a:active,
+:active {
+  text-decoration: none;
+  color: initial;
+}
+.header__logo {
+  width: 45px;
+  height: 45px;
+}
+button {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px var(--shadow--1), 0 1px 2px var(--shadow--2);
+  background-color: var(--whity-background);
+  color: var(--black);
+  transition: background-color 0.3s;
+  height: 50px;
+  min-width: 70px;
+}
+button:hover,
+button:focus {
+  background-color: var(--borders-color);
+  box-shadow: 0 14px 28px var(--shadow--3), 0 10px 10px var(--shadow--4);
+}
+button.little {
+  margin: 0;
+  height: auto;
+  min-width: unset;
+}
+button[disabled] {
+  color: var(--borders-color);
+}
+button[disabled] {
+  background-color: initial;
+  box-shadow: 0 1px 3px var(--shadow--1), 0 1px 2px var(--shadow--2);
+}
+/**
+ * End General
+ */
+/**
+ * Start Loggin
+ */
+.logging {
+  margin: 1rem auto;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  justify-content: stretch;
+  align-items: stretch;
+  grid-row-gap: 20px;
+}
+.logging--welcomebox {
+  min-width: 100px;
+  border: solid 1px var(--borders-color);
+  box-shadow: 0 1px 3px var(--shadow--1), 0 1px 2px var(--shadow--2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/**
+ * End Loggin
+ */
+
+/**
+ * Start Logged
+ */
+
+.logged {
+  margin: 0 auto;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: stretch;
+  grid-template: 50px 1fr / 1fr;
+}
+
+.logged--header {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.loggedBody {
+  display: grid;
+  grid-template: 50px 1fr 50px / 1fr;
+}
+.loggedBody--chatTitle {
+  border: solid 1px var(--borders-color);
+  border: solid 1px var(--borders-color);
+  display: grid;
+  align-content: center;
+  font-weight: bold;
+  color: var(--whity-background);
+  background-color: var(--pending);
+}
+.loggedBody--messages {
+  display: grid;
+  overflow-x: auto;
+}
+.loggedBody--userInput input {
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  color: var(--black);
+  vertical-align: middle;
+}
+
+/**
+ * End Logged
+ */
+
+/**
+ * Changes for biger screens
+ */
+@media (min-width: 700px) {
+  .logging,
+  .logged {
+    justify-content: center;
+  }
+
+  .logging--welcomebox,
+  .logged {
+    width: 80vw;
+  }
+}
