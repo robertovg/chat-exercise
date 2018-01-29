@@ -15,12 +15,12 @@ const subscribeUserChanges = gql`
   }
 `;
 
-const createChatRoom = gql`
-  mutation createChatRoom($component1: String!, $component2: String!) {
-    createChatRoom(component1: $component1, component2: $component2) {
+const createChatRoomMutation = gql`
+  mutation createChatRoom($member1: String!, $member2: String!) {
+    createChatRoom(member1: $member1, member2: $member2) {
       _id
-      component1
-      component2
+      member1
+      member2
     }
   }
 `;
@@ -50,8 +50,8 @@ class LoggedApp extends Component {
     this.props
       .createChatRoom({
         variables: {
-          component1: this.props.data.user._id,
-          component2: talkingWith,
+          member1: this.props.data.user._id,
+          member2: talkingWith,
         },
       })
       .then(e => {
@@ -107,12 +107,7 @@ class LoggedApp extends Component {
     );
   }
 }
-// export default LoggedApp;
-// export default compose(
-//   graphql(createChatRoom, { name: 'createChatRoom' }),
-//   graphql(chatRoomExists, { name: 'chatRoomExists' })
-// )(LoggedApp);
-export default graphql(createChatRoom, { name: 'createChatRoom' })(LoggedApp);
+export default graphql(createChatRoomMutation, { name: 'createChatRoom' })(LoggedApp);
 /**
  * Type Validations
  */

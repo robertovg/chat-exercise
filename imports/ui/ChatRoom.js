@@ -1,8 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { graphql, compose } from 'react-apollo';
+
+const chatRoomQuery = gql`
+  query chatRoom($chatRoomId: String!) {
+    chatRoom(chatRoomId: $chatRoomId) {
+      _id
+      custom
+      otherUser {
+        _id
+        alias
+      }
+      messages {
+        _id
+        createdAt
+        from
+        chatRoomId
+        content
+      }
+    }
+  }
+`;
+
+const createMessageMutation = gql`
+  mutation createMessage($from: String!, $chatRoomId: String!, $content: String!) {
+    createMessage(from: $from, chatRoomId: $chatRoomId, content: $content) {
+      _id
+      createdAt
+      from
+      chatRoomId
+      content
+    }
+  }
+`;
 
 class ChatRoom extends Component {
   state = {
+    // We dont' need them anymore FIXME roberto to delete
     messagesLogged: [],
     messagesOther: [],
   };
@@ -14,15 +49,27 @@ class ChatRoom extends Component {
       <div>
         <h1>Chat Rooms {chatRoom._id}:</h1>
         <ul>
-          <li>{chatRoom.component1}</li>
-          <li>{chatRoom.component2}</li>
+          <li>{chatRoom.member1}</li>
+          <li>{chatRoom.member2}</li>
         </ul>
       </div>
     );
   }
 }
-// load the messages for the two users when this components is loded
-export default ChatRoom;
+export default compose(
+  graphql(chatRoomQuery, {
+    name: 'chatRoomQuery',
+    options: ownProps => {
+      console.log('inside createMessage', ownProps);
+      return {
+        variables: {
+          chatRoomId: ownProps.chatRoom._id,
+        },
+      };
+    },
+  }),
+  graphql(createMessageMutation, { name: 'createMessage' })
+)(ChatRoom);
 
 /**
  * Type Validations

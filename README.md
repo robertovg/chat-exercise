@@ -11,7 +11,7 @@ The technology stack additionally used is: `React v.16` to render UI, `Graphql` 
 The application model is based on 3 entities.
 
 * **User** (using meteor `accounts-password` and a hardcoded password so user just need to remember their userName). For just the scope of the example, I won't store users on db.
-* **ChatRoom** Each time someone select one of the users register ( `Meteor.users` ) in the application, we create a new ChatRoom for the two user (Selected user and the `Meteor.userId()` ). Of course if this chatRoom exist, we just get it. To know who belongs to each ChatRoom, we will have the following properties: `createdAt`, `component1`: User, `component2`: User.
+* **ChatRoom** Each time someone select one of the users register ( `Meteor.users` ) in the application, we create a new ChatRoom for the two user (Selected user and the `Meteor.userId()` ). Of course if this chatRoom exist, we just get it. To know who belongs to each ChatRoom, we will have the following properties: `createdAt`, `member1`: User, `member2`: User.
 * **Message** Well each time someone write something, we store the message content. We store, the `from`, `content`, `createdAt` and of course `chatRoomId`.
 
 In terms of syntax, `babel` heavily used to get the best of last `es6` features (`stage-0`) and `eslint` with `prettier` to have a consistent code style across the application. Additionally to import `*.graphql` in the code using `babel-plugin-inline-import`

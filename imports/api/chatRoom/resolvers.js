@@ -1,57 +1,52 @@
+// eslint-disable-next-line
+import { Meteor } from 'meteor/meteor';
+// eslint-disable-next-line
+import { Accounts } from 'meteor/accounts-base';
 import ChatRoom from './chatRoom';
 import Message from '../message/message';
 
 export default {
-  Query: {
-    chatRoom(obj, { chatRoomId }) {
-      return ChatRoom.findOne({
-        chatRoomId,
-      }).fetch();
+  ChatRoom: {
+    otherUser: (chatRoomOwn, context) => {
+      console.log('inside otherUser', chatRoomOwn, context);
+      const loggedUserId = Accounts.userId();
+      const otherUserId = chatRoomOwn.member1 === loggedUserId ? loggedUserId : chatRoomOwn.member2;
+      return Meteor.users.findOne(otherUserId);
+    },
+    messages: chatRoom => {
+      console.log('inside message');
+      return Message.find({ from: chatRoom.member1 }).fetch();
     },
   },
-  ChatRoom: {
-    messagesLogged: (chatRoom, context) => {
-      console.log('messagesLogged', chatRoom, context);
-      const otherId =
-        chatRoom.component1 === context.userId ? chatRoom.component1 : chatRoom.component2;
-      // Message.find({ from: mess });
-      // Not sure if I have userId available. if not just load messagesComponent1 and
-      // messagesComponent2 and asing in the component
-      return [];
-    },
-
-    messagesOther: (chatRoom, context) => {
-      console.log('messagesLogged', chatRoom, context);
-      const otherId =
-        chatRoom.component1 === context.userId ? chatRoom.component1 : chatRoom.component2;
-      // Message.find({ from: mess });
-      return [];
+  Query: {
+    chatRoom(obj, { chatRoomId }) {
+      console.log(`inside message ${chatRoomId}`);
+      const result = ChatRoom.findOne({ _id: chatRoomId });
+      console.log(result);
+      return result || {};
     },
   },
   Mutation: {
-    createChatRoom(obj, { component1, component2 }) {
+    createChatRoom(obj, { member1, member2 }) {
       let chatRoomId;
       // I know this is not the cleanest approach, but easy wy to create
       // a chat room in case doesn't exists.
-      console.log('first search', component1, component2);
       let searchResult = ChatRoom.findOne({
-        component1,
-        component2,
+        member1,
+        member2,
       });
       // If is not found, I search now by the opposite
-      // In case the component2 was saved in the one.
+      // In case the member2 was saved in the one.
       if (!searchResult) {
-        console.log('second search');
         searchResult = ChatRoom.findOne({
-          component1: component2,
-          component2: component1,
+          member1: member2,
+          member2: member1,
         });
       }
       if (!searchResult) {
-        console.log('insert');
         chatRoomId = ChatRoom.insert({
-          component1,
-          component2,
+          member1,
+          member2,
         });
         return ChatRoom.findOne(chatRoomId);
       }
