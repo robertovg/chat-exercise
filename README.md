@@ -33,8 +33,10 @@ curl https://install.meteor.com/ | sh
 Then go the folder of the project and run in the terminal:
 
 ```bash
-npm install && npm start
+meteor npm install && npm start
 ```
+
+> !! Meteor will run npm that has been bundled with meteor. So important to install the dependencies with meteor npm install ( using meteor version so no conflicts when running )
 
 And you should have the application up and running in localhost:3000.
 
@@ -47,7 +49,7 @@ And you should have the application up and running in localhost:3000.
   * [x] **react**: react react-dom
   * [x] **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset
   * [x] **graphql**: graphql-server-express express graphql body-parser graphql-tag graphql-tools
-  * [x] **meteor dependencies**: apollo accounts-password
+  * [x] **meteor dependencies(.meteor/packages)**: meteor npm install --save apollo-client react react-dom react-apollo apollo-link apollo-link-http apollo-cache-inmemory apollo accounts-password bcrypt
   * [x] **subscriptions**: subscriptions-transport-ws apollo-link-ws
   * [x] **utilities && cosmetics**: font-awesome lodash
 * [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.

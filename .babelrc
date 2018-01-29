@@ -11,12 +11,5 @@
       "plugins": ["istanbul"]
     }
   },
-  "plugins": [
-    [
-      "transform-object-rest-spread",
-      "babel-plugin-root-import",
-      "transform-class-properties",
-      "babel-plugin-inline-import"
-    ]
-  ]
+  "plugins": [["babel-plugin-root-import", "babel-plugin-inline-import"]]
 }
