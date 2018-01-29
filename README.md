@@ -56,7 +56,7 @@ And you should have the application up and running in localhost:3000.
 * [ ] Generate `graphql` api definition (User, ChatRoom, Message).
 * [ ] Decide which style approach to using (BEM).
 * [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
-* [ ] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
+* [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
 * [ ] Create one ChatForm component (only show if a chat has been selected, to create the messages).
 * [ ] Be able to update show if the other user is writing.

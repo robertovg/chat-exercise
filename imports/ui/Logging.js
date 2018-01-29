@@ -24,7 +24,6 @@ export default class Logging extends Component {
         }
         // We log him if no other error than 403
         Meteor.loginWithPassword(this.username.value, HARDCODED_PASSWORD, error => {
-          console.log(error);
           if (!error) {
             // We always need to restore the store
             this.props.client.resetStore();

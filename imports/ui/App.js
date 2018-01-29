@@ -22,6 +22,10 @@ const userQuery = gql`
       _id
       alias
     }
+    users {
+      _id
+      alias
+    }
   }
 `;
 
