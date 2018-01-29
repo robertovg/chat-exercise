@@ -47,10 +47,10 @@ And you should have the application up and running in localhost:3000.
 * [x] Add needed dependencies to the package.
   * **babel && eslint && devDependencies**: babel-core babel-eslint babel-preset-env babel-preset-react babel-preset-stage-0 babel-plugin-inline-import eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-jsx-a11y eslint-plugin-prettier prettier eslint-plugin-import eslint-plugin-import
   * [x] **react**: react react-dom prop-types
-  * [x] **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset
+  * [x] **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset apollo-utilities
   * [x] **graphql**: graphql-server-express express graphql body-parser graphql-tag graphql-tools
   * [x] **meteor dependencies(.meteor/packages)**: meteor npm install --save apollo-client react react-dom react-apollo apollo-link apollo-link-http apollo-cache-inmemory apollo accounts-password bcrypt
-  * [x] **subscriptions**: subscriptions-transport-ws apollo-link-ws
+  * [x] **subscriptions**: subscriptions-transport-ws v0.5.4 apollo-link-ws graphql-subscriptions v0.3.1
   * [x] **utilities && cosmetics**: font-awesome lodash
 * [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.
 * [ ] Generate `graphql` api definition (User, ChatRoom, Message).
@@ -58,6 +58,7 @@ And you should have the application up and running in localhost:3000.
 * [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
 * [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [ ] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1)
+* [ ] Instead of "mocking importing" global variables from Meteor (WebApp, Meteor, Accounts), I'll add rule to have globally available.
 * [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
 * [ ] Create one ChatForm component (only show if a chat has been selected, to create the messages).
 * [ ] Be able to update show if the other user is writing.

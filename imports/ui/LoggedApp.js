@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
 // eslint-disable-next-line
 import { Meteor } from 'meteor/meteor';
 
@@ -7,18 +8,40 @@ export default class LoggedApp extends Component {
   // Meteor.users.find().fetch(); --> returns all logged users
   state = { talkingWith: '' };
 
-  logout = () => {
-    Meteor.logout();
-    this.props.client.resetStore();
-  };
+  componentWillMount() {
+    this.props.data.subscribeToMore({
+      document: gql`
+        subscription newUser {
+          user {
+            _id
+            alias
+          }
+        }
+      `,
+      // variables: {
+      //   channelId: this.props.match.params.channelId,
+      // },
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log('updateQuery');
+        return prev;
+      },
+    });
+  }
+
 
   handleChange(event) {
     this.setState({ talkingWith: event.target.value });
     // Fire talkingWith
   }
 
+  logout = () => {
+    Meteor.logout();
+    this.props.client.resetStore();
+  };
+
   render() {
     const { user, users = [] } = this.props.data;
+
     return (
       <header>
         <p>Hi {user.alias}</p>
