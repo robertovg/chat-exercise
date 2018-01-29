@@ -1,0 +1,9 @@
+type ChatRoom {
+  _id: String
+  component1: String
+  component2: String
+}
+
+type Mutation {
+  createChatRoom(component1: String!, component2: String!): ChatRoom
+}

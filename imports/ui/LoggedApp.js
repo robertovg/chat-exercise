@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 // eslint-disable-next-line
 import { Meteor } from 'meteor/meteor';
 
-export default class LoggedApp extends Component {
+const subscribeUserChanges = gql`
+  subscription justCreatedUser {
+    justCreatedUser {
+      _id
+      alias
+    }
+  }
+`;
+
+const createChatRoom = gql`
+  mutation createChatRoom($component1: String!, $component2: String!) {
+    createChatRoom(component1: $component1, component2: $component2) {
+      _id
+      component1
+      component2
+    }
+  }
+`;
+
+class LoggedApp extends Component {
   // Meteor.users.find().fetch(); --> returns all logged users
   state = { talkingWith: '' };
 
   componentWillMount() {
-    const SUBSCRIBE_USER_RANDOM_CHANGES = gql`
-      subscription justCreatedUser {
-        justCreatedUser {
-          _id
-          alias
-        }
-      }
-    `;
-
     this.props.data.subscribeToMore({
-      document: SUBSCRIBE_USER_RANDOM_CHANGES,
+      document: subscribeUserChanges,
       updateQuery: (prev, { subscriptionData }) => {
         console.log('updateQuery', prev, subscriptionData);
         // We need to return the same shape of data to show the new users
@@ -32,8 +43,22 @@ export default class LoggedApp extends Component {
   }
 
   handleChange(event) {
-    this.setState({ talkingWith: event.target.value });
-    // Fire talkingWith
+    const talkingWith = event.target.value;
+    this.setState({ talkingWith });
+    this.props
+      .createChatRoom({
+        variables: {
+          component1: this.props.data.user._id,
+          component2: talkingWith,
+        },
+      })
+      .then(e => {
+        // here we have to load the chatroom after the creation /
+        console.log(e);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   logout = () => {
@@ -42,7 +67,6 @@ export default class LoggedApp extends Component {
   };
 
   render() {
-    console.log('reloading');
     const { user, users = [] } = this.props.data;
 
     return (
@@ -59,7 +83,6 @@ export default class LoggedApp extends Component {
           </select>
         </label>
 
-        <ul>{}</ul>
         <button
           onClick={() => {
             this.logout();
@@ -71,16 +94,23 @@ export default class LoggedApp extends Component {
     );
   }
 }
-
+// export default LoggedApp;
+// export default compose(
+//   graphql(createChatRoom, { name: 'createChatRoom' }),
+//   graphql(chatRoomExists, { name: 'chatRoomExists' })
+// )(LoggedApp);
+export default graphql(createChatRoom, { name: 'createChatRoom' })(LoggedApp);
 /**
  * Type Validations
  */
 LoggedApp.propTypes = {
   client: PropTypes.object,
   data: PropTypes.object,
+  createChatRoom: PropTypes.func,
 };
 
 LoggedApp.defaultProps = {
   client: {},
   data: {},
+  createChatRoom() {},
 };

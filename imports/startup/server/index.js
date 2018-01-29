@@ -6,16 +6,16 @@ import merge from 'lodash/merge';
 // Schemas and Resolvers for our api
 import UserSchema from '../../api/user/User.graphql';
 import UserResolvers from '../../api/user/resolvers';
-import UsersSchema from '../../api/users/Users.graphql';
-import UsersResolvers from '../../api/users/resolvers';
+import ChatRoomSchema from '../../api/chatRoom/ChatRoom.graphql';
+import ChatRoomResolvers from '../../api/chatRoom/resolvers';
 
 const schema = makeExecutableSchema({
-  typeDefs: [UsersSchema, UserSchema],
-  resolvers: merge(UsersResolvers, UserResolvers),
+  typeDefs: [UserSchema, ChatRoomSchema],
+  resolvers: merge(UserResolvers, ChatRoomResolvers),
 });
 
 // Just creating a meteor server instance with apollo and injecting the schemas and resolvers
 // Now login, links and ws are managed by swydo:ddp-apollo
 createApolloServer({ schema });
 
-// 3s
+// 3sss

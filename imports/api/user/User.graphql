@@ -6,3 +6,11 @@ type User {
 type Query {
   user: User
 }
+
+extend type Query {
+  users: [User]
+}
+
+type Subscription {
+  justCreatedUser: User
+}
