@@ -2,33 +2,19 @@
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
-// import UserSchema from '../../api/user/User.graphql';
-// import UserResolvers from '../../api/user/resolvers';
+// eslint-disable-next-line
+import { Meteor } from 'meteor/meteor';
+// eslint-disable-next-line
+import { Accounts } from 'meteor/accounts-base';
 
-const typeDefs = `
-type User {
-  _id: String
-  name: String
-}
+import UserSchema from '../../api/user/User.graphql';
+import UserResolvers from '../../api/user/resolvers';
 
-type Query {
-  user: User
-}
-`;
-
-const resolvers = {
-  Query: {
-    user(obj, args, { user }) {
-      return user || {};
-    },
-  },
-};
+// as
 
 const schema = makeExecutableSchema({
-  // typeDefs: UserSchema,
-  // resolvers: UserResolvers,
-  typeDefs,
-  resolvers,
+  typeDefs: [UserSchema],
+  resolvers: UserResolvers,
 });
-
+// Just creating a meteor server instance with apollo and injecting the schemas and resolvers
 createApolloServer({ schema });

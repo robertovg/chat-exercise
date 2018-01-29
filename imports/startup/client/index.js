@@ -1,6 +1,8 @@
 import React from 'react';
 // eslint-disable-next-line
 import { Meteor } from 'meteor/meteor';
+// eslint-disable-next-line
+import { Accounts } from 'meteor/accounts-base';
 import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloLink, from } from 'apollo-link';

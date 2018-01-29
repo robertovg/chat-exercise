@@ -46,7 +46,7 @@ And you should have the application up and running in localhost:3000.
 * [x] Add `.babelrc` & `.eslintrc` with `prettier` configuration.
 * [x] Add needed dependencies to the package.
   * **babel && eslint && devDependencies**: babel-core babel-eslint babel-preset-env babel-preset-react babel-preset-stage-0 babel-plugin-inline-import eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-jsx-a11y eslint-plugin-prettier prettier eslint-plugin-import eslint-plugin-import
-  * [x] **react**: react react-dom
+  * [x] **react**: react react-dom prop-types
   * [x] **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset
   * [x] **graphql**: graphql-server-express express graphql body-parser graphql-tag graphql-tools
   * [x] **meteor dependencies(.meteor/packages)**: meteor npm install --save apollo-client react react-dom react-apollo apollo-link apollo-link-http apollo-cache-inmemory apollo accounts-password bcrypt
@@ -55,7 +55,7 @@ And you should have the application up and running in localhost:3000.
 * [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.
 * [ ] Generate `graphql` api definition (User, ChatRoom, Message).
 * [ ] Decide which style approach to using (BEM).
-* [ ] Create Login component and basic Auth Components: Register & Login / Application & Logout.
+* [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
 * [ ] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
 * [ ] Create one ChatForm component (only show if a chat has been selected, to create the messages).

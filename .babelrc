@@ -11,5 +11,5 @@
       "plugins": ["istanbul"]
     }
   },
-  "plugins": [["babel-plugin-root-import", "babel-plugin-inline-import"]]
+  "plugins": ["babel-plugin-root-import", "babel-plugin-inline-import"]
 }

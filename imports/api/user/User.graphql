@@ -1,6 +1,6 @@
 type User {
   _id: String
-  name: String
+  alias: String
 }
 
 type Query {
