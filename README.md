@@ -59,7 +59,7 @@ And you should have the application up and running in localhost:3000.
 * [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [x] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1) -> No working because of some [issues](https://github.com/apollographql/meteor-integration/issues/109). Moving to ddp-apollo to connect with apollo-client v2.
 * [ ] Create one ChatRoomMessages component (only show if a chat has been selected).
-* [ ] Create one ChatForm component (only show if a chat has been selected, to create the messages).
+* [x] Create one ChatForm component (only show if a chat has been selected, to create the messages).
 * [ ] Be able to update show if the other user is writing.
 * [ ] Work on the styles for mobile first only design. Just a simple grid with 3 sections (header, main, footer)
 * [ ] Place your own messages are on the right hand side in a green bubble and the other persons messages are on the left hand side in a grey bubble.

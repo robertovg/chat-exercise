@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 
+import ChatRoomMessages from './ChatRoomMessages';
+
 const chatRoomQuery = gql`
   query chatRoom($chatRoomId: String!) {
     chatRoom(chatRoomId: $chatRoomId) {
       _id
-      custom
       otherUser {
         _id
         alias
@@ -37,33 +38,75 @@ const createMessageMutation = gql`
 
 class ChatRoom extends Component {
   state = {
-    // We dont' need them anymore FIXME roberto to delete
-    messagesLogged: [],
-    messagesOther: [],
+    userInput: '',
+    disabled: false,
   };
+  handleMessageSubmission(event) {
+    event.preventDefault();
+    // To avoid double submission
+    if (this.state.disabled) {
+      return null;
+    }
+    this.setState({
+      disabled: true,
+    });
+    const { loggedUser, chatRoomData } = this.props;
+    // call the mutation
+    this.props
+      .createMessage({
+        variables: {
+          from: loggedUser._id,
+          chatRoomId: chatRoomData.chatRoom._id,
+          content: this.state.userInput,
+        },
+      })
+      .then(e => {
+        console.log(e);
+        this.setState({
+          userInput: '',
+          disabled: false,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  handleUserInputChange(event) {
+    // Here I should inform I'm writing...
+    this.setState({
+      userInput: event.target.value,
+    });
+  }
+
   render() {
-    const { chatRoom } = this.props;
-    console.log(this.state.messagesLogged);
-    console.log(this.state.messagesOther);
+    const { chatRoomData, loggedUser } = this.props;
+    if (chatRoomData.loading) return null;
     return (
       <div>
-        <h1>Chat Rooms {chatRoom._id}:</h1>
-        <ul>
-          <li>{chatRoom.member1}</li>
-          <li>{chatRoom.member2}</li>
-        </ul>
+        <section>
+          Chat between {loggedUser.alias} && {chatRoomData.chatRoom.otherUser.alias}
+        </section>
+        <ChatRoomMessages messages={chatRoomData.chatRoom.messages} />
+        <form onSubmit={e => this.handleMessageSubmission(e)}>
+          <input
+            value={this.state.userInput}
+            onChange={e => this.handleUserInputChange(e)}
+            disabled={this.state.disabled}
+          />
+        </form>
       </div>
     );
   }
 }
+
 export default compose(
   graphql(chatRoomQuery, {
-    name: 'chatRoomQuery',
+    name: 'chatRoomData',
     options: ownProps => {
-      console.log('inside createMessage', ownProps);
       return {
         variables: {
-          chatRoomId: ownProps.chatRoom._id,
+          chatRoomId: ownProps.chatRoomParam._id,
         },
       };
     },
@@ -75,9 +118,17 @@ export default compose(
  * Type Validations
  */
 ChatRoom.propTypes = {
-  chatRoom: PropTypes.object,
+  // It's used but in the query... eslint should be smarter
+  // eslint-disable-next-line
+  chatRoomParam: PropTypes.object,
+  chatRoomData: PropTypes.object,
+  loggedUser: PropTypes.object,
+  createMessage: PropTypes.func,
 };
 
 ChatRoom.defaultProps = {
-  chatRoom: {},
+  chatRoomParam: {},
+  chatRoomData: {},
+  loggedUser: {},
+  createMessage() {},
 };

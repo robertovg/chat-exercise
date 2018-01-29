@@ -55,13 +55,11 @@ class LoggedApp extends Component {
         },
       })
       .then(e => {
-        console.log(e);
         const chatRoom = e.data.createChatRoom;
-        console.log(chatRoom);
         this.setState({ talkingWith, chatRoom });
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -98,7 +96,7 @@ class LoggedApp extends Component {
         </header>
         <main>
           {this.state.chatRoom._id ? (
-            <ChatRoom chatRoom={this.state.chatRoom} />
+            <ChatRoom chatRoomParam={this.state.chatRoom} loggedUser={user} />
           ) : (
             <h1>Select one person to talk with</h1>
           )}

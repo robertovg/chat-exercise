@@ -1,6 +1,6 @@
 type Message {
   _id: String
-  createdAt: Int
+  createdAt: String
   from: String
   chatRoomId: String
   content: String

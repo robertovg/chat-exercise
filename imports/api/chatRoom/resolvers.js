@@ -10,7 +10,9 @@ export default {
     otherUser: (chatRoomOwn, context) => {
       console.log('inside otherUser', chatRoomOwn, context);
       const loggedUserId = Accounts.userId();
-      const otherUserId = chatRoomOwn.member1 === loggedUserId ? loggedUserId : chatRoomOwn.member2;
+      const otherUserId = chatRoomOwn.member1 === loggedUserId ? chatRoomOwn.member2 : loggedUserId;
+
+      console.log(otherUserId);
       return Meteor.users.findOne(otherUserId);
     },
     messages: chatRoom => {

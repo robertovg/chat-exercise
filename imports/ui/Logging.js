@@ -8,8 +8,8 @@ import { Accounts } from 'meteor/accounts-base';
 const HARDCODED_PASSWORD = 'XXX';
 
 export default class Logging extends Component {
-  login = e => {
-    e.preventDefault();
+  login = event => {
+    event.preventDefault();
     // The faster way to check if the user exists, is just try to create a new one,
     // If it fails, doesn't matter, anyway we have to log him.
     Accounts.createUser(
