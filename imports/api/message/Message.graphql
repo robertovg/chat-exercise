@@ -4,10 +4,16 @@ type Message {
   from: String
   chatRoomId: String
   content: String
+  specialType: String
 }
 
 type Mutation {
-  createMessage(from: String!, chatRoomId: String!, content: String!): Message
+  createMessage(
+    from: String!
+    chatRoomId: String!
+    content: String!
+    specialType: String
+  ): Message
 }
 
 extend type Subscription {

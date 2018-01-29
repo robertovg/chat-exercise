@@ -3,8 +3,10 @@
  * Some css variables
  */
 :root {
-  --black: rgba(0, 0, 0, 0.6);
+  --darker: rgba(0, 0, 0, 0.9);
+  --black: rgba(0, 0, 0, 0.8);
   --white: #fff;
+  --dark-grey: #a9a9a9;
   --borders-color: #ccc;
   --whity-background: #ecf0f1;
   --other: #d3d3d3;
@@ -14,12 +16,14 @@
   --shadow--2: rgba(0, 0, 0, 0.24);
   --shadow--3: rgba(0, 0, 0, 0.25);
   --shadow--4: rgba(0, 0, 0, 0.22);
+  --font-size: 16px;
 }
 /**
  * Start General
  */
 
 body {
+  font-size: var(--font-size);
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -143,8 +147,13 @@ button[disabled] {
   padding: 10px;
 }
 
-.loggedBody--messages .message.message--oops {
-  color: var(--borders-color);
+.loggedBody--messages .message.message--think {
+  color: var(--dark-grey);
+}
+
+.loggedBody--messages .message.message--highlight {
+  color: var(--darker);
+  font-size: calc(1.1 * var(--font-size));
 }
 .loggedBody--messages .isMine {
   justify-self: end;
@@ -171,6 +180,9 @@ button[disabled] {
   vertical-align: middle;
 }
 
+.loggedBody--userInput input::placeholder {
+  color: var(--borders-color);
+}
 /**
  * End Logged
  */

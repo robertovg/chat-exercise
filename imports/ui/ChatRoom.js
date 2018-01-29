@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
-
+import { specialTypes } from './Message';
 import ChatRoomMessages from './ChatRoomMessages';
 
+// Won't have time for all of them. But not really big deals to finish...
+const commands = {
+  nick: '/nick',
+  think: '/think',
+  oops: '/oops',
+  highlight: '/highlight',
+};
 const subscribeMessageChanges = gql`
   subscription justCreatedMessage {
     justCreatedMessage {
@@ -13,6 +20,7 @@ const subscribeMessageChanges = gql`
       from
       chatRoomId
       content
+      specialType
     }
   }
 `;
@@ -31,19 +39,31 @@ const chatRoomQuery = gql`
         from
         chatRoomId
         content
+        specialType
       }
     }
   }
 `;
 
 const createMessageMutation = gql`
-  mutation createMessage($from: String!, $chatRoomId: String!, $content: String!) {
-    createMessage(from: $from, chatRoomId: $chatRoomId, content: $content) {
+  mutation createMessage(
+    $from: String!
+    $chatRoomId: String!
+    $content: String!
+    $specialType: String
+  ) {
+    createMessage(
+      from: $from
+      chatRoomId: $chatRoomId
+      content: $content
+      specialType: $specialType
+    ) {
       _id
       createdAt
       from
       chatRoomId
       content
+      specialType
     }
   }
 `;
@@ -73,7 +93,7 @@ class ChatRoom extends Component {
   /**
    * Moving the logic of Message creation to a diferent function
    */
-  createTheMessage(from, chatRoomId, content, oops = false) {
+  createTheMessage(from, chatRoomId, content, specialType) {
     return new Promise((resolve, reject) => {
       // call the mutation
       this.props
@@ -82,6 +102,7 @@ class ChatRoom extends Component {
             from,
             chatRoomId,
             content,
+            specialType,
           },
         })
         .then(e => {
@@ -104,8 +125,25 @@ class ChatRoom extends Component {
     });
     const { loggedUser, chatRoomData } = this.props;
     // Put here a function to deal with special commands
-    const messageContent = this.state.userInput;
-    this.createTheMessage(loggedUser._id, chatRoomData.chatRoom._id, messageContent)
+    let messageContent = this.state.userInput;
+    let specialTypeParam;
+    if (messageContent.startsWith(commands.think)) {
+      specialTypeParam = specialTypes.think;
+      messageContent = messageContent.replace(commands.think, '');
+    }
+    if (messageContent.startsWith(commands.highlight)) {
+      specialTypeParam = specialTypes.highlight;
+      messageContent = messageContent.replace(commands.highlight, '');
+    }
+    // I think is a good practice not only trim when commands, but always
+    messageContent = messageContent.trim();
+
+    this.createTheMessage(
+      loggedUser._id,
+      chatRoomData.chatRoom._id,
+      messageContent,
+      specialTypeParam
+    )
       .then(e => {
         console.log(e);
         // I don't do anything with the new message because I want to subscribe

@@ -54,7 +54,7 @@ And you should have the application up and running in localhost:3000.
   * [x] **utilities && cosmetics**: font-awesome lodash
 * [x] Create the needed structure recommended by [Meteor](https://guide.meteor.com/structure.html#example-app-structure) and generating backbone of the application.
 * [x] Generate `graphql` api definition (User, ChatRoom, Message).
-* [ ] Decide which style approach to using (BEM).
+* [x] Decide which style approach to using (BEM).
 * [x] Create Login component and basic Auth Components: Register & Login / Application & Logout.
 * [x] Create ChatRoomsSelection component (just allow you to select one of all the Users, if too many people is here we should think in a way to reduce the User to be selected...).
 * [x] Have subscription working with Users. Best information about on [appollohql](https://www.apollographql.com/docs/react/recipes/meteor.html#Server-1) -> No working because of some [issues](https://github.com/apollographql/meteor-integration/issues/109). Moving to ddp-apollo to connect with apollo-client v2.
@@ -64,14 +64,14 @@ And you should have the application up and running in localhost:3000.
 * [ ] Be able to update show if the other user is writing.
 * [x] Work on the styles for mobile first only design. Just a simple grid with 3 sections (header, main, footer)
 * [x] Place your own messages are on the right hand side in a green bubble and the other persons messages are on the left hand side in a grey bubble.
-* [ ] Implement commands in chatForm messages:
+* [x] Implement commands in chatForm messages:
   * [ ] /nick <name> - sets your name for the chat
-  * [ ] /think <message> - makes the text appear in dark grey, instead of black
+  * [x] /think <message> - makes the text appear in dark grey, instead of black
   * [ ] /oops - removes the last message sent
-* [ ] Polish styles and UX.
+* [x] Polish styles and UX. (I think not bad for the time I spent 🤓)
 * [ ] Create some extras functionalities for commands:
   * [ ] When the user is typing, indication that they are typing should be shown to the other user.
   * [ ] (smile) should produce a smiley face, (wink) should produce a winking face
-  * [ ] When a new message arrives, it should slide in, and the messages above slide up
+  * [ ] When a new message arrives, it should slide in, and the messages above slide up.
   * [ ] /fadelast - would fade out the last message to 10% visibility
-  * [ ] /highlight <message> - would make the font of the message 10% bigger, and make the background 10% darker
+  * [x] /highlight <message> - would make the font of the message 10% bigger, and make the background 10% darker
