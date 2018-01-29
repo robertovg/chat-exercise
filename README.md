@@ -1,5 +1,7 @@
 # chat-exercise
 
+## Description
+
 **Just a simple example to show and practice code skills** resolving the implementation of a simple chat application between two person.
 
 Serverside implemented with `Meteor` with the out of the box DB provided: `Mongodb`
@@ -18,19 +20,37 @@ Let's use font-awesome to add some icons to make it a bit better.
 
 The application is designed to have one entry point, and make mandatory people to
 
+## Run the project in local
+
+Of course we need to have node installed in our computer.
+
+The server side is quite simple to install just execute:
+
+```bash
+curl https://install.meteor.com/ | sh
+```
+
+Then go the folder of the project and run in the terminal:
+
+```bash
+npm install && npm start
+```
+
+And you should have the application up and running in localhost:3000.
+
 ## TODOs
 
-* [ ] Create the project with `meteor` and plan the execution.
-* [ ] Add `.babelrc` & `.eslintrc` with `prettier` configuration.
-* [ ] Add needed dependencies to the package.
-  * **babel && eslint && devDependencies**: babel-core babel-eslint babel-preset-env babel-preset-react babel-preset-stage-0 babel-plugin-inline-import eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-jsx-a11y eslint-plugin-prettier prettier
-  * **react**: react react-dom
-  * **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset
-  * **graphql**: graphql-server-express express graphql body-parser graphql-tag graphql-tools
-  * **meteor dependencies**: apollo accounts-password
-  * **subscriptions**: subscriptions-transport-ws apollo-link-ws
-  * **utilities && cosmetics**: font-awesome lodash
-* [ ] Create the needed structure recommended by [Meteor](https://guide.meteor.com/#example-app).
+* [x] Create the project with `meteor` and plan the execution.
+* [x] Add `.babelrc` & `.eslintrc` with `prettier` configuration.
+* [x] Add needed dependencies to the package.
+  * **babel && eslint && devDependencies**: babel-core babel-eslint babel-preset-env babel-preset-react babel-preset-stage-0 babel-plugin-inline-import eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-jsx-a11y eslint-plugin-prettier prettier eslint-plugin-import eslint-plugin-import
+  * [x] **react**: react react-dom
+  * [x] **apollo**: apollo-client apollo-client-preset react-apollo apollo-client-preset
+  * [x] **graphql**: graphql-server-express express graphql body-parser graphql-tag graphql-tools
+  * [x] **meteor dependencies**: apollo accounts-password
+  * [x] **subscriptions**: subscriptions-transport-ws apollo-link-ws
+  * [x] **utilities && cosmetics**: font-awesome lodash
+* [ ] Create the needed structure recommended by [Meteor](https://guide.meteor.com/#example-app) and generating backbone of the application.
 * [ ] Generate `graphql` api definition (User, ChatRoom, Message).
 * [ ] Decide which style approach to using (BEM).
 * [ ] Create Login component and basic Auth Components: Register & Login / Application & Logout.
