@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 // eslint-disable-next-line
 import { Meteor } from 'meteor/meteor';
+import ChatRoom from './ChatRoom';
 
 const subscribeUserChanges = gql`
   subscription justCreatedUser {
@@ -26,7 +27,7 @@ const createChatRoom = gql`
 
 class LoggedApp extends Component {
   // Meteor.users.find().fetch(); --> returns all logged users
-  state = { talkingWith: '' };
+  state = { talkingWith: '', chatRoom: {} };
 
   componentWillMount() {
     this.props.data.subscribeToMore({
@@ -44,6 +45,7 @@ class LoggedApp extends Component {
 
   handleChange(event) {
     const talkingWith = event.target.value;
+    if (!talkingWith) return null;
     this.setState({ talkingWith });
     this.props
       .createChatRoom({
@@ -53,8 +55,10 @@ class LoggedApp extends Component {
         },
       })
       .then(e => {
-        // here we have to load the chatroom after the creation /
         console.log(e);
+        const chatRoom = e.data.createChatRoom;
+        console.log(chatRoom);
+        this.setState({ talkingWith, chatRoom });
       })
       .catch(error => {
         console.log(error);
@@ -70,27 +74,36 @@ class LoggedApp extends Component {
     const { user, users = [] } = this.props.data;
 
     return (
-      <header>
-        <p>Hi {user.alias}</p>
-        <label>
-          <select value={this.state.talkingWith} onChange={e => this.handleChange(e)}>
-            {users.filter(e => e._id !== user._id).map(e => (
-              <option key={e._id} value={e._id}>
-                {e.alias}
-              </option>
-            ))}
-            <option value="">Pick someone to talk to:</option>
-          </select>
-        </label>
+      <div>
+        <header>
+          <p>Hi {user.alias}</p>
+          <label>
+            <select value={this.state.talkingWith} onChange={e => this.handleChange(e)}>
+              {users.filter(e => e._id !== user._id).map(e => (
+                <option key={e._id} value={e._id}>
+                  {e.alias}
+                </option>
+              ))}
+              <option value="">Pick someone to talk to:</option>
+            </select>
+          </label>
 
-        <button
-          onClick={() => {
-            this.logout();
-          }}
-        >
-          Logout
-        </button>
-      </header>
+          <button
+            onClick={() => {
+              this.logout();
+            }}
+          >
+            Logout
+          </button>
+        </header>
+        <main>
+          {this.state.chatRoom._id ? (
+            <ChatRoom chatRoom={this.state.chatRoom} />
+          ) : (
+            <h1>Select one person to talk with</h1>
+          )}
+        </main>
+      </div>
     );
   }
 }
