@@ -1,0 +1,11 @@
+type Message {
+  _id: String
+  createdAt: Int
+  from: String
+  chatRoomId: String
+  content: String
+}
+
+type Mutation {
+  createMessage(from: String!, chatRoomId: String!, content: String!): Message
+}

@@ -2,8 +2,14 @@ type ChatRoom {
   _id: String
   component1: String
   component2: String
+  messagesLogged: [Message]
+  messagesOther: [Message]
 }
 
-type Mutation {
+extend type Mutation {
   createChatRoom(component1: String!, component2: String!): ChatRoom
+}
+
+extend type Query {
+  chatRoom: [ChatRoom]
 }

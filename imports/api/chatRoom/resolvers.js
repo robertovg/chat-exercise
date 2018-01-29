@@ -1,6 +1,33 @@
 import ChatRoom from './chatRoom';
+import Message from '../message/message';
 
 export default {
+  Query: {
+    chatRoom(obj, { chatRoomId }) {
+      return ChatRoom.findOne({
+        chatRoomId,
+      }).fetch();
+    },
+  },
+  ChatRoom: {
+    messagesLogged: (chatRoom, context) => {
+      console.log('messagesLogged', chatRoom, context);
+      const otherId =
+        chatRoom.component1 === context.userId ? chatRoom.component1 : chatRoom.component2;
+      // Message.find({ from: mess });
+      // Not sure if I have userId available. if not just load messagesComponent1 and
+      // messagesComponent2 and asing in the component
+      return [];
+    },
+
+    messagesOther: (chatRoom, context) => {
+      console.log('messagesLogged', chatRoom, context);
+      const otherId =
+        chatRoom.component1 === context.userId ? chatRoom.component1 : chatRoom.component2;
+      // Message.find({ from: mess });
+      return [];
+    },
+  },
   Mutation: {
     createChatRoom(obj, { component1, component2 }) {
       let chatRoomId;
