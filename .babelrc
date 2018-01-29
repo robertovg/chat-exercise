@@ -1,0 +1,22 @@
+{
+  "presets": ["react", "env", "stage-0"],
+  "env": {
+    "amd": {
+      "plugins": ["import-noop"]
+    },
+    "commonjs": {
+      "plugins": ["import-noop"]
+    },
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  },
+  "plugins": [
+    [
+      "transform-object-rest-spread",
+      "babel-plugin-root-import",
+      "transform-class-properties",
+      "babel-plugin-inline-import"
+    ]
+  ]
+}
