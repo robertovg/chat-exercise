@@ -1,3 +1,4 @@
+import { withFilter } from 'graphql-subscriptions';
 import Message from './message';
 import { pubsub, newMessageEvent } from '../pubsub';
 
@@ -21,7 +22,15 @@ export default {
   },
   Subscription: {
     justCreatedMessage: {
-      subscribe: () => pubsub.asyncIterator(newMessageEvent),
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(newMessageEvent),
+        (payload = {}, variables = {}) => {
+          // This makes only the subscriptions when both are in the same chatRoom
+          const { justCreatedMessage } = payload;
+          const { chatRoomId = '' } = justCreatedMessage;
+          return chatRoomId === variables.chatRoomId;
+        }
+      ),
     },
   },
 };

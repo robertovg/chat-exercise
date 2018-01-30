@@ -46,7 +46,8 @@ class LoggedApp extends Component {
   handleChange(event) {
     const talkingWith = event.target.value;
     if (!talkingWith) return null;
-    this.setState({ talkingWith });
+    // Just to force reload ChatRoom and set subscriber correctly
+    this.setState({ talkingWith, chatRoom: {} });
     this.props
       .createChatRoom({
         variables: {
@@ -85,7 +86,6 @@ class LoggedApp extends Component {
               <option value="">Pick someone to talk to:</option>
             </select>
           </label>
-
           <button
             onClick={() => {
               this.logout();

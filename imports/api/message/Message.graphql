@@ -17,5 +17,5 @@ type Mutation {
 }
 
 extend type Subscription {
-  justCreatedMessage: Message
+  justCreatedMessage(chatRoomId: String!): Message
 }

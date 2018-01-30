@@ -13,8 +13,8 @@ const commands = {
   highlight: '/highlight',
 };
 const subscribeMessageChanges = gql`
-  subscription justCreatedMessage {
-    justCreatedMessage {
+  subscription justCreatedMessage($chatRoomId: String) {
+    justCreatedMessage(chatRoomId: $chatRoomId) {
       _id
       createdAt
       from
@@ -75,8 +75,12 @@ class ChatRoom extends Component {
   };
 
   componentWillMount() {
+    console.log('chatRoomWillMount', this.props.chatRoomParam._id);
     this.props.chatRoomData.subscribeToMore({
       document: subscribeMessageChanges,
+      variables: {
+        chatRoomId: this.props.chatRoomParam._id,
+      },
       updateQuery: (prev, { subscriptionData }) => {
         console.log('updateQuery', prev, subscriptionData);
         // We need to return the same shape of data with the new message
@@ -91,7 +95,7 @@ class ChatRoom extends Component {
     });
   }
   /**
-   * Moving the logic of Message creation to a diferent function
+   * Moving the logic of Message creation to a different function
    */
   createTheMessage(from, chatRoomId, content, specialType) {
     return new Promise((resolve, reject) => {
